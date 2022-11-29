@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"time"
 
-	"rabbitmq/internal/rabbitmq"
+	"rabbitmq/internal/server"
 
 	"github.com/streadway/amqp"
 )
@@ -16,7 +16,7 @@ const queueName = "Test-Queue"
 const sendMessageCount = 50
 
 func main() {
-	rServer, err := rabbitmq.New()
+	rServer, err := server.New()
 	if err != nil {
 		log.Fatalf("Connection Error: %s", err)
 	}
@@ -49,7 +49,7 @@ func main() {
 	// infinite loop sending messages to queue
 	go func(max int) {
 		for i := 0; i < max; i++ {
-			err := rServer.Send(rabbitmq.SendMessage{
+			err := rServer.Send(server.SendMessage{
 				Queue: queueName, // + "1",
 				Body:  fmt.Sprintf("Test-Message1-%d", i),
 			})
