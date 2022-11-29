@@ -5,3 +5,4 @@
 - Run RabbitMQ docker instance: ```make rabbitserver```
 - Run example code: ```make local```
 
+RabbitMQ Manager: http://localhost:15672/#/queues
